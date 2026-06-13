@@ -8,6 +8,7 @@
 !/app/design
 !/app/design/*
 !/app/etc/config.php
+!/app/etc/env.php
 
 !/packages
 !/packages/*
