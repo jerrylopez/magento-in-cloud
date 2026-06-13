@@ -9,10 +9,10 @@ return [
                 'id_prefix' => '69d_',
                 'backend' => 'redis',
                 'backend_options' => [
-                    'server' => getenv('REDIS_HOST') ?: 'redis',
+                    'server' => $_ENV['REDIS_HOST'],
                     'database' => '0',
-                    'port' => getenv('REDIS_PORT') ?: '6379',
-                    'password' => getenv('REDIS_PASSWORD') ?: '',
+                    'port' => $_ENV['REDIS_PORT'],
+                    'password' => $_ENV['REDIS_PASSWORD'],
                     'compress_data' => '1',
                     'compression_lib' => '',
                     'serializer' => 'igbinary',
@@ -27,10 +27,10 @@ return [
                 'id_prefix' => '69d_',
                 'backend' => 'redis',
                 'backend_options' => [
-                    'server' => getenv('REDIS_HOST') ?: 'redis',
+                    'server' => $_ENV['REDIS_HOST'],
                     'database' => '1',
-                    'port' => getenv('REDIS_PORT') ?: '6379',
-                    'password' => getenv('REDIS_PASSWORD') ?: '',
+                    'port' => $_ENV['REDIS_PORT'],
+                    'password' => $_ENV['REDIS_PASSWORD'],
                     'compress_data' => '0',
                     'compression_lib' => '',
                     'serializer' => 'igbinary'
@@ -42,7 +42,7 @@ return [
         ],
         'allow_parallel_generation' => false
     ],
-    'MAGE_MODE' => getenv('MAGE_MODE') ?: 'developer',
+    'MAGE_MODE' => $_ENV['MAGE_MODE'],
     'system' => [
         'default' => [
             'design' => [
@@ -58,7 +58,7 @@ return [
                     'offloader_header' => 'X-Forwarded-Proto',
                     'use_in_frontend' => '1',
                     'use_in_adminhtml' => '1',
-                    'base_url' => getenv('APP_URL') . '/' ?: 'https://magento-in-cloud.test/'
+                    'base_url' => $_ENV['APP_URL'] . '/'
                 ],
                 'seo' => [
                     'use_rewrites' => '1'
@@ -85,7 +85,7 @@ return [
                     'local_storage' => '0'
                 ],
                 'unsecure' => [
-                    'base_url' => getenv('APP_URL') . '/' ?: 'https://magento-in-cloud.test/'
+                    'base_url' => $_ENV['APP_URL'] . '/'
                 ]
             ],
             'catalog' => [
@@ -146,7 +146,7 @@ return [
         ]
     ],
     'backend' => [
-        'frontName' => 'backend'
+        'frontName' => $_ENV['BACKEND_NAME']
     ],
     'remote_storage' => [
         'driver' => 'file'
@@ -158,16 +158,16 @@ return [
         'consumers_wait_for_messages' => 1
     ],
     'crypt' => [
-        'key' => getenv('APP_KEY') ?: 'base647CyeQcO+DM6VTLfdSj8aFyNL7P1ioQ0g6fhegGAPI1I='
+        'key' => $_ENV['CRYPT_KEY']
     ],
     'db' => [
         'table_prefix' => '',
         'connection' => [
             'default' => [
-                'host' => getenv('DB_HOST') ?: 'db',
-                'dbname' => getenv('DB_NAME') ?: 'magento',
-                'username' => getenv('DB_USER') ?: 'magento',
-                'password' => getenv('DB_PASSWORD') ?: 'magento',
+                'host' => $_ENV['DB_PORT'] ? $_ENV['DB_HOST'].':'.$_ENV['DB_PORT'] : $_ENV['DB_HOST'],
+                'dbname' => $_ENV['DB_DATABASE'],
+                'username' => $_ENV['DB_USERNAME'],
+                'password' => $_ENV['DB_PASSWORD'],
                 'model' => 'mysql4',
                 'engine' => 'innodb',
                 'active' => '1',
@@ -186,9 +186,9 @@ return [
     'session' => [
         'save' => 'redis',
         'redis' => [
-            'host' => getenv('REDIS_HOST') ?: 'redis',
-            'port' => getenv('REDIS_PORT') ?: '6379',
-            'password' => getenv('REDIS_PASSWORD') ?: '',
+            'host' => $_ENV['REDIS_HOST'],
+            'port' => $_ENV['REDIS_PORT'],
+            'password' => $_ENV['REDIS_PASSWORD'],
             'timeout' => '2.5',
             'retries' => '0',
             'persistent_identifier' => '',
