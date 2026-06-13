@@ -1,0 +1,17 @@
+*
+/app/*
+!/app
+!/app/etc
+/app/etc/*
+!/app/code
+!/app/code/*
+!/app/design
+!/app/design/*
+!/app/etc/config.php
+
+!/packages
+!/packages/*
+!/composer.json
+!/composer.lock
+!/robots.txt
+!/.gitignore
