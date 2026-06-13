@@ -11,6 +11,7 @@
 
 !/packages
 !/packages/*
+!/packages/laravel-framework-dummy/*
 !/composer.json
 !/composer.lock
 !/robots.txt

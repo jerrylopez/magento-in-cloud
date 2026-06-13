@@ -1,0 +1,6 @@
+{
+    "name": "laravel/framework",
+    "description": "This is just a dummy composer package used to be able to function with Laravel Cloud",
+    "version": "13.15.0",
+    "require": {}
+}
