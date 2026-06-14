@@ -8,6 +8,16 @@
 
 use Magento\Framework\App\Bootstrap;
 
+// Temporary debug — remove after diagnosing
+if (isset($_GET['debug_media'])) {
+    header('Content-Type: text/plain');
+    echo 'REQUEST_URI: ' . ($_SERVER['REQUEST_URI'] ?? 'NULL') . "\n";
+    echo 'SCRIPT_NAME: ' . ($_SERVER['SCRIPT_NAME'] ?? 'NULL') . "\n";
+    echo 'PHP_SELF: ' . ($_SERVER['PHP_SELF'] ?? 'NULL') . "\n";
+    echo 'DOCUMENT_ROOT: ' . ($_SERVER['DOCUMENT_ROOT'] ?? 'NULL') . "\n";
+    exit;
+}
+
 // Route /media/* requests to the lightweight R2 proxy.
 // Streams directly from R2 without booting Magento or writing locally,
 // since the filesystem is read-only on Laravel Cloud.
