@@ -19,14 +19,15 @@ if (empty($relativePath) || str_contains($relativePath, '..')) {
     exit;
 }
 
-$bucket = $_ENV['AWS_BUCKET'] ?? '';
-$region = $_ENV['AWS_DEFAULT_REGION'] ?? 'auto';
-$endpoint = $_ENV['AWS_ENDPOINT'] ?? '';
-$key = $_ENV['AWS_ACCESS_KEY_ID'] ?? '';
-$secret = $_ENV['AWS_SECRET_ACCESS_KEY'] ?? '';
+$bucket = $_ENV['AWS_BUCKET'] ?? $_SERVER['AWS_BUCKET'] ?? getenv('AWS_BUCKET') ?: '';
+$region = $_ENV['AWS_DEFAULT_REGION'] ?? $_SERVER['AWS_DEFAULT_REGION'] ?? getenv('AWS_DEFAULT_REGION') ?: 'auto';
+$endpoint = $_ENV['AWS_ENDPOINT'] ?? $_SERVER['AWS_ENDPOINT'] ?? getenv('AWS_ENDPOINT') ?: '';
+$key = $_ENV['AWS_ACCESS_KEY_ID'] ?? $_SERVER['AWS_ACCESS_KEY_ID'] ?? getenv('AWS_ACCESS_KEY_ID') ?: '';
+$secret = $_ENV['AWS_SECRET_ACCESS_KEY'] ?? $_SERVER['AWS_SECRET_ACCESS_KEY'] ?? getenv('AWS_SECRET_ACCESS_KEY') ?: '';
 
 if (empty($bucket) || empty($endpoint) || empty($key) || empty($secret)) {
     http_response_code(500);
+    echo 'Media proxy: missing R2 configuration';
     exit;
 }
 
@@ -62,7 +63,9 @@ try {
 } catch (Aws\S3\Exception\S3Exception $e) {
     if ($e->getStatusCode() === 404) {
         http_response_code(404);
+        echo 'Media proxy: object not found - ' . $objectKey;
     } else {
         http_response_code(502);
+        echo 'Media proxy: R2 error - ' . $e->getAwsErrorCode();
     }
 }
