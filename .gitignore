@@ -13,6 +13,7 @@
 !/pub/media
 !/pub/media/styles.css
 !/pub/index.php
+!/pub/media-proxy.php
 
 !/packages
 !/packages/*
