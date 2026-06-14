@@ -8,13 +8,13 @@
 
 use Magento\Framework\App\Bootstrap;
 
-// Route /media/* requests to the lightweight R2 proxy.
-// Streams directly from R2 without booting Magento or writing locally,
-// since the filesystem is read-only on Laravel Cloud.
+// Route /media/* requests to get.php (Magento's media storage handler)
+// before bootstrapping Magento, since get.php has its own bootstrap.
+// This is needed because Nginx rewrites are not available on Laravel Cloud.
 $requestUri = $_SERVER['REQUEST_URI'] ?? '';
 $path = parse_url($requestUri, PHP_URL_PATH);
 if (strpos($path, '/media/') === 0) {
-    require __DIR__ . '/media-proxy.php';
+    require __DIR__ . '/get.php';
     exit;
 }
 
