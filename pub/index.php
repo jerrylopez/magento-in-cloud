@@ -8,6 +8,16 @@
 
 use Magento\Framework\App\Bootstrap;
 
+// Route /media/* requests to get.php (Magento's media storage handler)
+// before bootstrapping Magento, since get.php has its own bootstrap.
+// This is needed because Nginx rewrites are not available on Laravel Cloud.
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+$path = parse_url($requestUri, PHP_URL_PATH);
+if (strpos($path, '/media/') === 0) {
+    require __DIR__ . '/get.php';
+    exit;
+}
+
 try {
     require __DIR__ . '/../app/bootstrap.php';
 } catch (\Exception $e) {
@@ -22,16 +32,6 @@ try {
 HTML;
     http_response_code(500);
     exit(1);
-}
-
-// Route /media/* requests to get.php (Magento's media storage handler)
-// since Nginx rewrites are not available on Laravel Cloud.
-$requestUri = $_SERVER['REQUEST_URI'] ?? '';
-$path = parse_url($requestUri, PHP_URL_PATH);
-if (strpos($path, '/media/') === 0) {
-    $_SERVER['PATH_INFO'] = $path;
-    require __DIR__ . '/get.php';
-    exit;
 }
 
 $bootstrap = Bootstrap::create(BP, $_SERVER);
