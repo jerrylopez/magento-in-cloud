@@ -13,6 +13,8 @@
 !/pub/media
 !/pub/media/styles.css
 !/pub/index.php
+!/pub/media/catalog
+!/pub/media/catalog/**
 
 !/packages
 !/packages/*
