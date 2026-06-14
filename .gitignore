@@ -9,6 +9,9 @@
 !/app/design/*
 !/app/etc/config.php
 !/app/etc/env.php
+!/pub
+!/pub/media
+!/pub/media/styles.css
 
 !/packages
 !/packages/*
