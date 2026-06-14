@@ -148,20 +148,6 @@ return [
     'backend' => [
         'frontName' => $_ENV['BACKEND_NAME']
     ],
-    'remote_storage' => [
-        'driver' => 'aws-s3',
-        'config' => [
-            'bucket' => $_ENV['AWS_BUCKET'],
-            'region' => $_ENV['AWS_DEFAULT_REGION'],
-            'endpoint' => $_ENV['AWS_ENDPOINT'],
-            'use_path_style_endpoint' => false,
-            'credentials' => [
-                'key' => $_ENV['AWS_ACCESS_KEY_ID'],
-                'secret' => $_ENV['AWS_SECRET_ACCESS_KEY'],
-            ],
-        ],
-        'prefix' => '',
-    ],
     'config' => [
         'async' => 0
     ],
