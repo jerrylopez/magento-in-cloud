@@ -383,6 +383,8 @@ return [
         'PayPal_BraintreeGiftWrapping' => 1,
         'PayPal_BraintreeGraphQl' => 1,
         'PayPal_BraintreeReward' => 1,
+        'Swissup_Core' => 1,
+        'Swissup_SearchMysqlLegacy' => 1,
         'Zepgram_DisableSearchEngine' => 1
     ],
     'scopes' => [
